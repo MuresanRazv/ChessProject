@@ -1,5 +1,6 @@
 import pygame
 pygame.font.init()
+BROWN = 125, 92, 52
 BLACK = 0, 0, 0
 WHITE = 255, 255, 255
 FONT = pygame.font.Font('freesansbold.ttf', 16)
@@ -31,6 +32,6 @@ def draw_table(size, screen):
             if counter % 2 != 0:
                 pygame.draw.rect(screen, WHITE, rect, 0)
             else:
-                pygame.draw.rect(screen, BLACK, rect, 0)
+                pygame.draw.rect(screen, BROWN, rect, 0)
             counter += 1
         counter += 1

@@ -7,39 +7,30 @@ screen = pygame.display.set_mode(SIZE)
 BLACK = 0, 0, 0
 WHITE = 255, 255, 255
 GRAY = 255 // 2, 255 // 2, 255 // 2
-INITIAL_POSITIONS_WHITE = {"b1": ((80 - 30) + 80 * 2, 10, 60, 60), "b2": ((80 - 30) + 80 * 5, 10, 60, 60),
-                           "k": ((80 - 30) + 80 * 4, 10, 60, 60), "q": ((80 - 30) + 80 * 3, 10, 60, 60),
-                           "n1": ((80 - 30) + 80, 10, 60, 60), "n2": ((80 - 30) + 80 * 6, 10, 60, 60),
-                           "r1": ((80 - 30), 10, 60, 60), "r2": ((80 - 30) + 80 * 7, 10, 60, 60),
-                           "p1": ((80 - 30), 10 + 80, 60, 60), "p2": ((80 - 30) + 80, 10 + 80, 60, 60),
-                           "p3": ((80 - 30) + 80 * 2, 10 + 80, 60, 60), "p4": ((80 - 30) + 80 * 3, 10 + 80, 60, 60),
-                           "p5": ((80 - 30) + 80 * 4, 10 + 80, 60, 60), "p6": ((80 - 30) + 80 * 5, 10 + 80, 60, 60),
-                           "p7": ((80 - 30) + 80 * 6, 10 + 80, 60, 60), "p8": ((80 - 30) + 80 * 7, 10 + 80, 60, 60)}
 
-INITIAL_POSITIONS_BLACK = {"b1": ((80 - 30)+ 80 * 2, 640 - 70, 60, 60), "b2": ((80 - 30) + 80 * 5, 640 - 70, 60, 60),
-                           "k": ((80 - 30) + 80 * 4, 640 - 70, 60, 60), "q": ((80 - 30) + 80 * 3, 640 - 70, 60, 60),
-                           "n1": ((80 - 30) + 80, 640 - 70, 60, 60), "n2": ((80 - 30) + 80 * 6, 640 - 70, 60, 60),
-                           "r1": ((80 - 30), 640 - 70, 60, 60), "r2": ((80 - 30) + 80 * 7, 640 - 70, 60, 60),
-                           "p1": ((80 - 30), 640 - 150, 60, 60), "p2": ((80 - 30) + 80, 640 - 150, 60, 60),
-                           "p3": ((80 - 30) + 80 * 2, 640 - 150, 60, 60), "p4": ((80 - 30) + 80 * 3, 640 - 150, 60, 60),
-                           "p5": ((80 - 30) + 80 * 4, 640 - 150, 60, 60), "p6": ((80 - 30) + 80 * 5, 640 - 150, 60, 60),
-                           "p7": ((80 - 30) + 80 * 6, 640 - 150, 60, 60), "p8": ((80 - 30) + 80 * 7, 640 - 150, 60, 60)}
+PIECES = WHITE_PIECES, BLACK_PIECES = extract_png.get_png()
 
-PIECES = WHITES, BLACKS = extract_png.get_png()
-WHITES_RECT, BLACKS_RECT = [], []
-for white, black in zip(WHITES, BLACKS):
-    WHITES_RECT.append(white.get_rect())
-    BLACKS_RECT.append(black.get_rect())
-WHITES_RECT[0] = INITIAL_POSITIONS_WHITE["b1"]
+WHITES = []
+for whites in WHITE_PIECES:
+    WHITES.append((whites[0], whites[1]))
+BLACKS = []
+for blacks in BLACK_PIECES:
+    BLACKS.append((blacks[0], blacks[1]))
 
 running = True
-
+current_click_pos = [0, 0]
 
 while running:
+
     screen.fill(GRAY)
     draw.draw_table(SIZE, screen)
-    screen.blit(WHITES[0], WHITES_RECT[0])
+    draw.highlight_square(screen, 80, current_click_pos)
+    for w_piece, b_piece in zip(WHITES, BLACKS):
+        screen.blit(w_piece[0], w_piece[1])
+        screen.blit(b_piece[0], b_piece[1])
     for event in pygame.event.get():
+        if event.type == pygame.MOUSEBUTTONDOWN:
+            current_click_pos[0], current_click_pos[1] = event.pos
         if event.type == pygame.QUIT:
             sys.exit()
 

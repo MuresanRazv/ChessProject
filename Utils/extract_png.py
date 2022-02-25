@@ -24,23 +24,22 @@ INITIAL_POSITIONS_BLACK = {"p1": ((80 - 30), 640 - 150, 80, 80), "p2": ((80 - 30
 def get_png():
     W_PIECES = []
     W_PIECES.extend(
-        [pygame.image.load("C:/Users/seNNNz0rel/Documents/ChessProject/Chess_Pieces/plt60.png").convert_alpha()] * 8 +
-        [pygame.image.load("C:/Users/seNNNz0rel/Documents/ChessProject/Chess_Pieces/blt60.png").convert_alpha()] * 2 +
-        [pygame.image.load("C:/Users/seNNNz0rel/Documents/ChessProject/Chess_Pieces/nlt60.png").convert_alpha()] * 2 +
-        [pygame.image.load("C:/Users/seNNNz0rel/Documents/ChessProject/Chess_Pieces/rlt60.png").convert_alpha()] * 2 +
-        [pygame.image.load("C:/Users/seNNNz0rel/Documents/ChessProject/Chess_Pieces/qlt60.png").convert_alpha()] +
-        [pygame.image.load("C:/Users/seNNNz0rel/Documents/ChessProject/Chess_Pieces/klt60.png").convert_alpha()]
+        ["plt60.png"] * 8 +
+        ["blt60.png"] * 2 +
+        ["nlt60.png"] * 2 +
+        ["rlt60.png"] * 2 +
+        ["qlt60.png"] +
+        ["klt60.png"]
     )
 
     B_PIECES = []
     B_PIECES.extend(
-        [pygame.image.load("C:/Users/seNNNz0rel/Documents/ChessProject/Chess_Pieces/pdt60.png").convert_alpha()] * 8 +
-        [pygame.image.load("C:/Users/seNNNz0rel/Documents/ChessProject/Chess_Pieces/bdt60.png").convert_alpha()] * 2 +
-        [pygame.image.load("C:/Users/seNNNz0rel/Documents/ChessProject/Chess_Pieces/ndt60.png").convert_alpha()] * 2 +
-        [pygame.image.load("C:/Users/seNNNz0rel/Documents/ChessProject/Chess_Pieces/rdt60.png").convert_alpha()] * 2 +
-        [pygame.image.load("C:/Users/seNNNz0rel/Documents/ChessProject/Chess_Pieces/qdt60.png").convert_alpha()] +
-        [pygame.image.load("C:/Users/seNNNz0rel/Documents/ChessProject/Chess_Pieces/kdt60.png").convert_alpha()]
+        ["pdt60.png"] * 8 +
+        ["bdt60.png"] * 2 +
+        ["ndt60.png"] * 2 +
+        ["rdt60.png"] * 2 +
+        ["qdt60.png"] +
+        ["kdt60.png"]
     )
-    print(W_PIECES[0])
 
     return zip(W_PIECES, INITIAL_POSITIONS_WHITE.values()), zip(B_PIECES, INITIAL_POSITIONS_BLACK.values())

@@ -73,17 +73,18 @@ Function to highlight the square in which the player clicked
 """
 
 
-def highlight_square(screen, square_size, pos):
-    square_pos = find_square(pos)
-    if square_pos:
-        rect = pygame.Rect(square_pos[0], square_pos[1], square_size, square_size)
-        pygame.draw.rect(screen, GREEN, rect, 3)
-
+def highlight_square(screen, square_size, all_pos):
+    for pos in all_pos:
+        square_pos = find_square(pos)
+        if square_pos:
+            rect = pygame.Rect(square_pos[0], square_pos[1], square_size, square_size)
+            pygame.draw.rect(screen, GREEN, rect, 3)
 
 
 def check_collision(pos, all_sprites):
     for p in all_sprites.sprites():
-        if pos[0] == p.rect.left and pos[1] == p.rect.top:
+        print(p.rect)
+        if pos[0] + 10 == p.rect.left and pos[1] + 10 == p.rect.top:
             return True
     return False
 
@@ -93,30 +94,34 @@ Function to draw all possible movements for a piece
 """
 
 
-def draw_all_possible(piece, all_sprites, screen):
+def draw_all_possible(piece, all_sprites, to_highlight):
     current_x, current_y = piece.rect.left, piece.rect.top
     if piece.get_type() == "blt60.png":
         while current_x < 680 and not check_collision((current_x, current_y), all_sprites) and current_y < 680:
             current_x += 80
             current_y += 80
-            highlight_square(screen, 80, (current_x, current_y))
+            to_highlight.append((current_x, current_y))
 
         while current_x > 80 and not check_collision((current_x, current_y), all_sprites) and current_y < 680:
             current_x -= 80
             current_y += 80
-            highlight_square(screen, 80, (current_x, current_y))
+            to_highlight.append((current_x, current_y))
 
     if piece.get_type() == "bdt60.png":
         while current_x < 680 and not check_collision((current_x, current_y), all_sprites) and current_y > 0:
             current_x += 80
             current_y -= 80
-            highlight_square(screen, 80, (current_x, current_y))
+            to_highlight.append((current_x, current_y))
 
         while current_x > 80 and not check_collision((current_x, current_y), all_sprites) and current_y > 0:
             current_x -= 80
             current_y -= 80
-            highlight_square(screen, 80, (current_x, current_y))
+            to_highlight.append((current_x, current_y))
 
     if piece.get_type() == "plt60.png":
         if not check_collision((current_x, current_y + 80), all_sprites):
-            highlight_square(screen, 80, (current_x, current_y + 80))
+            to_highlight.append((current_x, current_y + 80))
+
+    if piece.get_type() == "pdt60.png":
+        if not check_collision((current_x, current_y - 80), all_sprites):
+            to_highlight.append((current_x, current_y - 80))
